@@ -15,7 +15,7 @@
  *
  */
 #include <android/api-level.h>
-#include <stdlib.h>
+#include <stdio.h>
 #include <string.h>
 #include <jni.h>
 
