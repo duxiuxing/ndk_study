@@ -14,6 +14,8 @@
  * limitations under the License.
  *
  */
+#include <android/api-level.h>
+#include <stdlib.h>
 #include <string.h>
 #include <jni.h>
 
@@ -59,5 +61,7 @@ Java_com_example_hellojni_HelloJni_stringFromJNI( JNIEnv* env,
 #define ABI "unknown"
 #endif
 
-    return (*env)->NewStringUTF(env, "Hello from JNI !  Compiled with ABI " ABI ".");
+    char buffer[128] = { 0 };
+    sprintf(buffer, "Compiled with API %d & ABI %s.", __ANDROID_API__, ABI);
+    return (*env)->NewStringUTF(env, buffer);
 }
