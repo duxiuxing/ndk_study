@@ -56,6 +56,7 @@ public class HelloJni extends AppCompatActivity {
      * installation time by the package manager.
      */
     static {
+        System.loadLibrary("stlport_shared");
         System.loadLibrary("hello-jni");
     }
 }
