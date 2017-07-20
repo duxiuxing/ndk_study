@@ -1,0 +1,42 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 26
+    buildToolsVersion '26.0.0'
+    defaultConfig {
+        applicationId 'com.example.hellojni'
+        minSdkVersion 14
+        targetSdkVersion 26
+        versionCode 1
+        versionName "1.0"
+
+        ndk {
+            abiFilters 'armeabi-v7a' // 不指定就8种架构全编
+            stl 'stlport_shared' // 也可以通过ndkBuild arguments 'APP_STL=stlport_shared'来指定
+        }
+
+        externalNativeBuild {
+            ndkBuild {
+                // 若不指定'APP_PLATFORM=android-x'，就保持与minSdkVersion一致
+                // arguments 'APP_PLATFORM=android-14', 'APP_STL=stlport_shared'
+            }
+        }
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    externalNativeBuild {
+        ndkBuild {
+            path 'src/main/jni/Android.mk'
+        }
+    }    
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile 'com.android.support:appcompat-v7:26.+'
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+}

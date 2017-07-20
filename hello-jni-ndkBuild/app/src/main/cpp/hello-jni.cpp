@@ -15,7 +15,8 @@
  *
  */
 #include <android/api-level.h>
-#include <stdlib.h>
+#include <stdio.h>
+#include <string>
 #include <string.h>
 #include <jni.h>
 
@@ -25,6 +26,7 @@
  *
  *   hello-jni/app/src/main/java/com/example/hellojni/HelloJni.java
  */
+extern "C"
 JNIEXPORT jstring JNICALL
 Java_com_example_hellojni_HelloJni_stringFromJNI( JNIEnv* env,
                                                   jobject thiz )
@@ -60,8 +62,9 @@ Java_com_example_hellojni_HelloJni_stringFromJNI( JNIEnv* env,
 #else
 #define ABI "unknown"
 #endif
-
     char buffer[128] = { 0 };
     sprintf(buffer, "Compiled at %s with API %d & ABI %s.", __TIME__, __ANDROID_API__, ABI);
-    return (*env)->NewStringUTF(env, buffer);
+
+    std::string str = buffer;
+    return env->NewStringUTF(str.c_str());
 }
