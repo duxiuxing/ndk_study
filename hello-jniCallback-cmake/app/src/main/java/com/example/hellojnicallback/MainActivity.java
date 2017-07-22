@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onPause () {
         super.onPause();
-        StopTicks();
+        stopTicks();
     }
 
     /*
@@ -75,5 +75,5 @@ public class MainActivity extends AppCompatActivity {
     }
     public native  String stringFromJNI();
     public native void startTicks();
-    public native void StopTicks();
+    public native void stopTicks();
 }
